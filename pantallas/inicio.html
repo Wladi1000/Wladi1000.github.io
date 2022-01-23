@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relaxing Points</title>
+
+    <link rel="stylesheet" href="../estilos/inicio.css">
+</head>
+<body>
+    <section class="main">
+        <section class="main__mejoras">
+            <div class="main__mejoras__card">
+                <img src="../recursos/imgs/01.gif" alt="">
+                <!-- <img src="../recursos/imgs/veronica-rodriguez_001-3.gif" alt=""> -->
+                <div class="up-description">
+                    <p class="up-name">Camping night</p>
+                    <p class="up-roll">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+            <div class="main__mejoras__card">
+                <img src="../recursos/imgs/02.gif" alt="">
+                <!-- <img src="../recursos/imgs/bouncybouncy.gif" alt=""> -->
+                <div class="up-description">
+                    <p class="up-name">Camping night</p>
+                    <p class="up-roll">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+            <div class="main__mejoras__card">
+                <img src="../recursos/imgs/03.gif" alt="">
+                <div class="up-description">
+                    <p class="up-name">Camping night</p>
+                    <p class="up-roll">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+            <div class="main__mejoras__card">
+                <img src="../recursos/imgs/04.gif" alt="">
+                <div class="up-description">
+                    <p class="up-name">Camping night</p>
+                    <p class="up-roll">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+            </div>
+        </section>
+        <section class="main__game-map">
+            <label class="main__game-map__points" for="">999.999.999</label>
+            <div class="main__game-map__player-card">
+                <img src="../recursos/imgs/avatar_01.png" alt="" class="player-avatar">
+                <div class="player-description">
+                    <div class="player-name"></div>
+                        <h3>Name:</h3>
+                        <p class="player-name">Player 755</p>
+                    <div class="player-rol">
+                        <h3>Roll:</h3>
+                        <p class="player-roll">The Big Man</p>
+                    </div>
+                </div>
+            </div>
+            <button class="main__game-map--tap-btn">Tap!</button>
+        </section>
+        <section class="main__achievements">
+            <div class="main__achievements__card">
+                <img src="../recursos/imgs/achievement_01.jpg" alt="">
+                <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="main__achievements__card">
+                <img src="../recursos/imgs/achievement_01.jpg" alt="">
+                <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="main__achievements__card">
+                <img src="../recursos/imgs/achievement_01.jpg" alt="">
+                <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="main__achievements__card">
+                <img src="../recursos/imgs/achievement_01.jpg" alt="">
+                <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+        </section>
+    </section>
+    <section class="game-upgrades">
+        <button class="game-upgrades--new-up">New UP↑</button>
+        <button class="game-upgrades--acl-up">Acl. UP↑</button>
+        <button class="game-upgrades--tap-up">Tap UP↑</button>
+        <button class="game-upgrades--shop">
+            <ion-icon name="bag-handle-outline"></ion-icon>
+        </button>
+    </section>
+
+    <!-- Scripts -->
+    
+    <script>
+        const list = document.querySelectorAll('.main__mejoras__card');
+        function activateLink(){
+            // list.forEach((item) =>
+            // item.classList.remove('active'));
+            this.classList.toggle('active');
+        }
+        list.forEach((item) =>
+        item.addEventListener('click', activateLink));
+    </script>
+    <script>
+        const logros = document.querySelectorAll('.main__achievements__card');
+        function activateLink(){
+            // list.forEach((item) =>
+            // item.classList.remove('active'));
+            this.classList.toggle('active');
+        }
+        logros.forEach((item) =>
+        item.addEventListener('click', activateLink));
+    </script>
+
+    <!-- Scripts__Ionic -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
