@@ -27,7 +27,7 @@ body{
     /* border: solid; */
 
     height: var(--tamP);
-    width: 20%;
+    width: 15%;
     overflow-y: auto;
     overflow-x: none;
     background: #00000048;
@@ -56,7 +56,6 @@ body{
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-
     margin: 10px 10px;
     height: 200px;
     width: 90%;
@@ -66,7 +65,7 @@ body{
 .main__mejoras__card img,
 .main__achievements__card img{
     transition: 0.2s;
-    margin: 0px 0 -76% 0;
+    margin: 0px 0 -108% 0;
     height: 100%;
     width: 100%;
     border-radius: 5%;
@@ -77,12 +76,12 @@ body{
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-around;
     height: 100%;
     width: 100%;
     border-radius: 5%;
     transition: 0.5s;
-    position:static;
+    /* position:static; */
     /* background: #969393c2; */
     
 }
@@ -102,22 +101,23 @@ body{
 .main__mejoras__card.active .up-description{
     padding-top: 10%;
     background: #000000ab;
-    /* height: 00%; */
     
 }
 .main__mejoras__card.active p,
 .main__achievements__card.active p{
     display: inline;
-    font-size: 65%;
+    /* padding-bottom: 15%; */
+    /* margin-bottom: 5%; */
+    font-size: 60%;
     color: #ffffff;
-    height: 20%;
+    /* height: 5%; */
     width: 80%;
 }
 .main__mejoras__card.active button{
     display:inline ;
 
-    margin-top: 15%;
-    padding: 10px 5px;
+    /* margin-top: 15%; */
+    padding: 5px 5px;
     border-radius: 10px;
     border: white 2px solid;
     background: transparent;
@@ -135,15 +135,27 @@ body{
 
 /* --------------------- Game Map --------------------- */
 .main__game-map{
+    /* display: flex; */
+    /* align-items: center;
+    justify-content: center;
+    flex-direction: column;
+*/
+    display: flex;
+    height: var(--tamP);
+    width: 90%;
+    background: #000000ab;
+
+    /* border:solid; */
+}
+.main__game-map__money-section{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
     height: var(--tamP);
-    width: 60%;
-
-    /* border:solid; */
+    width: 50%;
+    height: 100%;
 }
 .main__game-map__points{
     display: flex;
@@ -164,8 +176,8 @@ body{
     justify-content: center;
 
     margin-bottom: 3%;
-    height: 25%;
-    width: 35%;
+    height: 30%;
+    width: 70%;
     border-radius: 10px;
     border: solid 5px;
 
@@ -208,8 +220,88 @@ body{
     border-radius: 15px;
 }
 
+/* --------------------- Map of the city --------------------- */
+.main__game-map__city{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    
+    width: 50%;
+    height: 100%;
+}
+
+
+.main__game-map__city__buildings{
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    height:80%;
+}
+.main__game-map__city__buildings::-webkit-scrollbar{
+    width: 8px;
+    margin-right: 5px;
+}
+.main__game-map__city__buildings::-webkit-scrollbar-thumb{
+    background: #00000048;
+    border-radius: 4px;
+    /* border-right: 5px solid #2c2525; */
+    /* margin-right: 10px; */
+}
+.main__game-map__city__buildings::-webkit-scrollbar-thumb:active {
+    background-color: #e45050c0;;
+}
+.main__game-map__city__buildings__card{
+    overflow-x: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    margin: 10px 10px;
+    height: 200px;
+    width: 40%;
+    /* border: solid; */
+    transition: 0.5s;
+}
+.main__game-map__city__buildings__card img{
+    transition: 0.2s;
+    margin: 0px 0 -78% 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 5%;
+    border: solid;
+    object-fit: cover;
+}
+.main__game-map__city__buildings__card .city-description{
+    background: #00000070;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+    border-radius: 5%;
+
+    color: white;
+    transition: 0.5s;
+}
+.main__game-map__city__buildings__card h3{
+    font-size: 120%;
+    text-decoration: underline;
+}
+.main__game-map__city__buildings__card .city-description .city-roll{
+    display: none;
+}
+
+
 
 /* --------------------- achievements --------------------- */
+
+.main__achievements{
+    display: none;
+}
+
 .main__achievements__card img{
     width: 100%;
     object-fit: cover;

@@ -13,39 +13,73 @@
         <section class="main">
             <section class="main__mejoras">
                     <div class="main__mejoras__card"
-                        v-for="card in carts" :key="card.locke"
-                        :disable="card.lock==true">
+                        v-for="card in carts" :key="card.name" 
+                         
+                        >
                         <img :src="card.image" >
                         <div class="up-description">
                             <p class="up-name">{{card.name}}</p>
                             <p class="up-roll">{{card.description}}</p>
+                            <p class="level">--> Nivel actual: {{card.level}}</p>
                             <button 
+                            title="Tu dinero tiene que ser mayor al costo para poder comprar la mejora" 
                             :disabled="puntos<card.cost" 
-                            v-show="card.lock"
-                            @click="incrementoProfit(card)">Costo: {{card.cost}}</button>
+                            @click="incrementoProfit(card)">Costo: {{Math.trunc(card.cost)}}</button>
                         </div>
                         
                     </div>
                     
             </section>
             <section class="main__game-map">
-                <label class="main__game-map__points" for="">{{ Math.trunc(puntos) }}</label>
-                <div class="main__game-map__player-card">
-                    <img src="recursos/imgs/avatar_01.png" alt="" class="player-avatar">
-                    <div class="player-description">
-                        <div class="player-name"></div>
-                            <h3>Name:</h3>
-                            <p class="player-name">Player 755</p>
-                        <div class="player-rol">
-                            <h3>Roll:</h3>
-                            <p class="player-roll">The Big Man</p>
-                            <h3>Profits Pasivos:</h3>
-                            <p class="player-roll">{{acelerador*profit}}</p>
+                <div class="main__game-map__money-section">
+                    <p>Estos son tus beneficios actuales:</p>
+                    <label class="main__game-map__points" title="Tu dinero actual" >{{ Math.trunc(puntos) }} $</label>
+                    <div class="main__game-map__player-card">
+                        <img src="recursos/imgs/avatar_01.png" alt="" class="player-avatar">
+                        <div class="player-description">
+                            <div class="player-name"></div>
+                                <h3>Name:</h3>
+                                <p class="player-name">Player 755</p>
+                            <div class="player-rol">
+                                <h3>Roll:</h3>
+                                <p class="player-roll">The Big Man</p>
+                                <h3>Profits Pasivos:</h3>
+                                <p class="player-roll">{{acelerador*profit}} /seg</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="main__game-map--tap-btn" 
+                    title="Dale tap y empieza a generar beneficios!" 
+                    @click="clickeando">Tap!</button>
+                </div>
+                <div class="main__game-map__city">
+                    <p style="color: #00000b7c;">Version State: 0.1.2 Creator: WladiOneThousand</p>
+                    <h2>Esta es tu ciudad, gestionala como mejor creas conveniente</h2>
+                    <p>Personas actuales en tu ciudad: {{persons}}</p>
+                    <label class="" for=""></label>
+                    <div class="main__game-map__city__buildings">
+                        <div class="main__game-map__city__buildings__card"
+                        v-for="build in ciudad" 
+                        :key="build.name" 
+                        >
+                            <img :src="build.image" >
+                            <div class="city-description">
+                                <h3 class="city-name">{{build.name}}</h3>
+                                <p class="city-roll">{{build.description}}</p>
+                                <p class="city-persons">Personas diaria +{{build.sumador_personas}}</p>
+                                <p class="city-level">--> Nivel actual: {{build.level}}</p>
+                                <p class="city-maintenance">Egresos: {{build.cost_mantenimiento}} $</p>
+                                <button 
+                                title="Tus ingresos pasivos necesitan ser mayores a los egresos para comprar la mejora" 
+                                :disabled="(acelerador<build.cost_mantenimiento) && (puntos<build.costo_mejora)"
+                                @click="mejoraEdificio(build)"
+                                >
+                                    Mejora: {{build.costo_mejora}} $
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button class="main__game-map--tap-btn"
-                    @click="clickeando">Tap!</button>
             </section>
             <section class="main__achievements">
                 <div class="main__achievements__card">
@@ -64,17 +98,17 @@
                     <img src="recursos/imgs/achievement_01.jpg" alt="">
                     <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
-                <H3 style="color: #00000b7c;">Version State: 0.1.1<br>Creator: Wladimir A.K.A WladiOneThousand</H2>
+                <!-- <H3 style="color: #00000b7c;">Version State: 0.1.1<br>Creator: WladiOneThousand</H2> -->
             </section>
         </section>
         <section class="game-upgrades">
             <button class="game-upgrades--new-up">New UP↑</button>
             <button class="game-upgrades--acl-up"
                 :disabled="puntos<aclCosto"
-                @click="incrementoAcl" >Ingresos pasivos: {{aclNivel}}<br>Costo de Mejora: {{ Math.round(aclCosto) }}</button>
+                @click="incrementoAcl" >Nivel de pasivos: {{aclNivel}}<br>Costo de Mejora: {{ Math.round(aclCosto) }}</button>
             <button class="game-upgrades--tap-up"
                 :disabled="puntos<clickCosto"
-                @click="incrementoTap">Ingresos por click: {{clickNivel}}<br>Costo de Mejora: {{ Math.round(clickCosto) }}</button>
+                @click="incrementoTap">Nivel de click: {{clickNivel}}<br>Costo de Mejora: {{ Math.round(clickCosto) }}</button>
             <button class="game-upgrades--shop">
                 <ion-icon name="bag-handle-outline"></ion-icon>
             </button>
@@ -100,38 +134,38 @@
                     {
                         name: "Reuniones nocturnas",
                         description: "Tus civiles estan divirtiendose al sonar de la musica local y bailando a la luz de la fogata! Profit: x2",
-                        cost: 2000,
                         image: "recursos/imgs/01-Reuniones_nocturnas.gif",
-                        lock:true,
-                        profit: 2
+                        cost: 2000,
+                        profit: 2,
+                        level: 1,
                     },
                     {
                         name: "Cafe del pueblo",
                         description: "Ciber restaurante serve relajacion para tus civiles. Menos estres, mejores resultados. Profit: x2",
-                        cost: 20000,
                         image: "recursos/imgs/02-Cafe_del_pueblo.gif",
-                        lock:true,
-                        profit: 3
+                        cost: 20000,
+                        profit: 3,
+                        level: 1,
                     },
                     {
                         name: "Nueva Corp",
                         description: "Compannia que agiliza los procesos de desarrollo tecnologico en la ciudad. Profit x3",
-                        cost: 200000,
                         image: "recursos/imgs/03-Nueva_Corp.gif",
-                        lock:true,
-                        profit: 4
+                        cost: 200000,
+                        profit: 4,
+                        level: 1,
                     },
                     {
                         name: "Canal Pixcel-9",
                         description: "Dicen que las novelas son de ayuda al momento de llevar una vidad mas critica (Aunque no haya galanes en la vida real). Profit x5",
-                        cost: 2000000,
                         image: "recursos/imgs/04-Pixcel_9.gif",
-                        lock:true,
-                        profit: 5
+                        cost: 2000000,
+                        profit: 5,
+                        level: 1,
                     }
                     ],
                     // Caracteristicas del personaje
-                    puntos: 0,
+                    puntos: 10000,
                     acelerador: 0,
                     aceleradorClick: 1,
                     profit: 1,
@@ -143,7 +177,64 @@
                     clickCosto:4,
                     clickNivel:1,
 
-                    multiplicadorCostoAcl:10
+                    multiplicadorCostoAcl:10,
+
+                    // ciudad a construir
+                    persons:0,
+                    acl_persons:0,
+                    ciudad:[
+                        {
+                            name: 'Escuelas',
+                            description: 'La educacion es primordial en cualquier ciudad',
+                            image: '/recursos/imgs/11_school.gif',
+                            sumador_personas: 0,
+                            costo_mejora: 600000,
+                            cost_mantenimiento: 30000,
+                            personas_por_mejora:1,
+                            level: 0
+                        },
+                        {
+                            name: 'Hospitales',
+                            description: 'Salud para tus ciudadanos',
+                            image: '/recursos/imgs/12_hospital.gif',
+                            sumador_personas: 0,
+                            costo_mejora: 380000000,
+                            cost_mantenimiento: 150000,
+                            personas_por_mejora:1,
+                            level: 0
+                        },
+                        {
+                            name: 'Cuerpo policial',
+                            description: 'Las leyes nos aseguran la libertad',
+                            image: '/recursos/imgs/13_police.png',
+                            sumador_personas: 0,
+                            costo_mejora: 120000000,
+                            cost_mantenimiento: 250000,
+                            personas_por_mejora:1,
+                            level: 0
+                        },
+                        {
+                            name: 'Centrales electricas',
+                            description: '¿Quien dijo que tenar mas de un Guri es malo?',
+                            image: '/recursos/imgs/14_electric.gif',
+                            sumador_personas: 0,
+                            costo_mejora: 600000000,
+                            cost_mantenimiento: 500000,
+                            personas_por_mejora:1,
+                            level: 0
+                        },
+                        {
+                            name: 'Turismo',
+                            description: 'Atraer gente es chevere para los negocios',
+                            image: '/recursos/imgs/15_turismo.jpg',
+                            sumador_personas: 0,
+                            costo_mejora: 6000000,
+                            cost_mantenimiento: 250000,
+                            personas_por_mejora:1,
+                            level: 0
+                        }
+                    ]
+
                 }
             },
 
@@ -166,7 +257,15 @@
                 incrementoProfit(element){
                     this.puntos -= element.cost;
                     this.profit *= element.profit;
-                    element.lock= false;
+                    element.cost *= 100000;
+                    element.level ++;
+                },
+                mejoraEdificio(element){
+                    this.acelerador -= element.cost_mantenimiento;
+                    this.puntos -= element.costo_mejora;
+                    element.level ++;
+                    element.sumador_personas += element.personas_por_mejora;
+                    this.acl_persons += element.sumador_personas;
                 }
             },
 
@@ -174,6 +273,7 @@
             {
                 this.interval = setInterval(() => {
                     this.puntos =  this.puntos + (this.acelerador*this.profit);
+                    this.persons += this.acl_persons; 
                 }, 1000);
                 this.isRunning = true;
             }
